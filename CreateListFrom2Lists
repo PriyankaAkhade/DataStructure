@@ -1,0 +1,109 @@
+package com.example.demo;
+
+public class LinkedListFrom2Lists {
+
+    //Structure for Node
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int item) {
+            this.data = item;
+            this.next = null;
+        }
+    }
+
+    //Creating head and tmeporary object of Node
+    Node head, temp;
+
+    //Method to add node to a LinkedList
+    void addNode(Node newNode) {
+        if (this.head == null) {
+            this.head = newNode;
+            temp = this.head;
+            return;
+        } else {
+            temp.next = newNode;
+            temp = newNode;
+        }
+
+    }
+
+    //Method to print all node data from a given LinkedList
+    void displayAll() {
+        if (this.head == null)
+            return;
+
+        Node tmp = this.head;
+
+        while (tmp != null) {
+            System.out.print("\t" + tmp.data + " ");
+            tmp = tmp.next;
+        }
+    }
+
+    //This method compares data of each node from 2 different LinkedList of same length and creates new list for greater values.
+    void compareAndCreateList(LinkedListFrom2Lists list1, LinkedListFrom2Lists list2) {
+        if (list1.head == null)
+            return;
+
+        //Preserving head node from both the LinkedLists
+        Node nodeFromList1 = list1.head;
+        Node nodeFromList2 = list2.head;
+        
+        //Creating temporary node 
+        Node tmp;
+        while (nodeFromList1 != null) {
+        
+            //Comparing node data
+            if (nodeFromList1.data < nodeFromList2.data) {
+                tmp = nodeFromList2;
+            } else {
+                tmp = nodeFromList1;
+            }
+
+            //Adding node to new LinkedList
+            this.addNode(tmp);
+            
+            //Updating counter of both the Lists
+            nodeFromList1 = nodeFromList1.next;
+            nodeFromList2 = nodeFromList2.next;
+        }
+
+        //Printing newly created LinkedList
+        this.displayAll();
+    }
+
+    public static void main(String[] args) {
+    
+        //Creating 2 LinkedLists
+        LinkedListFrom2Lists list1 = new LinkedListFrom2Lists();
+        LinkedListFrom2Lists list2 = new LinkedListFrom2Lists();
+
+        //Adding nodes to 1st list
+        list1.addNode(new Node(5));
+        list1.addNode(new Node(2));
+        list1.addNode(new Node(3));
+        list1.addNode(new Node(8));
+
+        //Printing 1st list
+        list1.displayAll();
+        System.out.println("\n\t-------------");
+
+        //Adding nodes to 2nd list
+        list2.addNode(new Node(1));
+        list2.addNode(new Node(7));
+        list2.addNode(new Node(4));
+        list2.addNode(new Node(5));
+
+        //Printing 2nd list
+        list2.displayAll();
+        System.out.println("\n\t============");
+        
+        //Creating 3rd list to store greater values among both the lists
+        LinkedListFrom2Lists newList = new LinkedListFrom2Lists();
+        
+        //Calling method to compare and store node to newly created LinkedList
+        newList.compareAndCreateList(list1, list2);
+    }
+}
