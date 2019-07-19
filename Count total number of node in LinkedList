@@ -1,0 +1,69 @@
+package com.example.demo;
+
+public class CountNodesGfG {
+
+    //Structure for a node
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    //Declaring node objects
+    Node head, temp;
+
+    //Method to insert node
+    void insertNode(Node node) {
+
+        if (this.head == null) {
+            this.head = node;
+            this.temp = this.head;
+        } else {
+            while (this.temp.next != null) {
+                this.temp = this.temp.next;
+            }
+            temp.next = node;
+        }
+    }
+
+    //Printing all nodes
+    void displayAll(CountNodesGfG list) {
+
+        while (list.head != null) {
+            System.out.print("\t" + list.head.data + " ");
+            list.head = list.head.next;
+        }
+    }
+
+    //Method to count total number of nodes using recursion
+    int getCount(Node head) {
+        if (head == null) {
+            return 0;
+        } else {
+            return 1 + getCount(head.next);
+        }
+    }
+
+    public static void main(String[] args) {
+
+       CountNodesGfG list = new CountNodesGfG();
+       
+       //Adding nodes to LinkedList
+       list.insertNode(new Node(10));
+       list.insertNode(new Node(15));
+       list.insertNode(new Node(20));
+       list.insertNode(new Node(25));
+       list.insertNode(new Node(30));
+            
+       //Printing all nodes data
+       list.displayAll(list);
+       
+       //printing total count 
+       System.out.print("\tTotal number of nodes: " + list.getCount(list.head));
+
+    }
+}
