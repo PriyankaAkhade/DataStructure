@@ -1,0 +1,70 @@
+package com.example.demo;
+
+public class LinkedListDemo {
+
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    Node head;
+
+    void printList() {
+        Node n = head;
+        while (n != null) {
+            System.out.print(n.data + " ");
+            n = n.next;
+        }
+    }
+
+    void push(Node newNode) {
+        newNode.next = head;
+        head = newNode;
+    }
+
+
+    void pushAfter(Node prevNode, Node newNode){
+        newNode.next = prevNode.next;
+        prevNode.next = newNode;
+    }
+
+    void append(Node newNode){
+        if (head == null){
+            head = newNode;
+            return;
+        }
+
+        newNode.next = null;
+
+        Node last = head;
+        while (last.next != null)
+            last = last.next;
+
+        last.next = newNode;
+    }
+    public static void main(String[] args) {
+        LinkedListDemo list = new LinkedListDemo();
+
+        list.head = new Node(10);
+        Node second = new Node(20);
+        Node third = new Node(30);
+
+        list.head.next = second;
+        second.next = third;
+
+        list.printList();
+
+        System.out.println("\n------------");
+
+        Node newNode = new Node(40);
+//      list.push(newNode);
+//      list.pushAfter(second,newNode);
+        list.append(newNode);
+        list.printList();
+    }
+}
